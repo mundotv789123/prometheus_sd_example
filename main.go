@@ -14,8 +14,15 @@ func main() {
 			{
 				"targets": []string{"app-java:8080"},
 				"labels": gin.H{
-					"__meta_prometheus_job": "example",
-					"__metrics_path__":      "/actuator/prometheus",
+					"job":              "example-1",
+					"__metrics_path__": "/actuator/prometheus",
+				},
+			},
+			{
+				"targets": []string{"app-java2:8080"},
+				"labels": gin.H{
+					"job":              "example-2",
+					"__metrics_path__": "/actuator/prometheus",
 				},
 			},
 		}

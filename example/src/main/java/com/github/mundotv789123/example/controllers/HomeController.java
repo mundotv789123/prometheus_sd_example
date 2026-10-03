@@ -14,4 +14,10 @@ public class HomeController {
         return ResponseEntity.ok("Olá mundo");
     }
     
+    @GetMapping("/erro")
+    public ResponseEntity<String> erro() {
+        String texto = null;
+        texto.equals("erro 500 proposital");
+        return ResponseEntity.ok("Olá mundo");
+    }
 }

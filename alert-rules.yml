@@ -1,0 +1,14 @@
+groups:
+- name: demo-service-alerts
+  rules:
+  - alert: DemoServiceHighErrorRate
+    expr: |
+      (
+        sum without(status) (rate(http_server_requests_seconds_count{outcome!="SUCCESS"}[1m])) / sum without(status) (rate(http_server_requests_seconds_count[1m])) * 100 > 50
+      )
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      title: 'Detectado alto volume de requisições com erros {{ $labels.method }}: {{ $labels.uri }}'
+      description: 'O endpoint {{$labels.uri}} método {{ $labels.method }} na aplicação {{ $labels.job }} causou uma exceção {{ $labels.exception }} Maior que {{ printf "%.2f" $value }}% das requisições.'

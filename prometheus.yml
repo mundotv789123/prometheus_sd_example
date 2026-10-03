@@ -1,9 +1,18 @@
 global:
   scrape_interval: 15s
 
+rule_files:
+  - alert-rules.yml
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['alertmanager:9093']
+
 scrape_configs:
   - job_name: "go-discovery"
 
     http_sd_configs:
       - url: http://app-sd:8080/api/prometheus/sd
         refresh_interval: 30s
+
