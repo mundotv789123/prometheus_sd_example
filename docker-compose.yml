@@ -2,3 +2,5 @@ services:
   app:
     image: go_teste_metrics
     build: .
+    ports:
+      - "8080:8080"
