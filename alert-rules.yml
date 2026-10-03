@@ -1,4 +1,15 @@
 groups:
+- name: targets
+  rules:
+  - alert: TargetDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "Target {{ $labels.instance }} indisponível"
+      description: "O target {{ $labels.instance }} do job {{ $labels.job }} está indisponível há mais de 1 minuto."
+
 - name: demo-service-alerts
   rules:
   - alert: DemoServiceHighErrorRate
