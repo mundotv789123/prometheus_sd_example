@@ -1,6 +1,13 @@
 services:
-  app:
+  app_sd:
     image: go_teste_metrics
     build: .
     ports:
       - "8080:8080"
+
+  app_java:
+    image: java_spring_app
+    build: example
+    ports:
+      - "8081:8080"
+
