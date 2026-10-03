@@ -1,13 +1,23 @@
+volumes:
+  prometheus-data:
+
 services:
-  app_sd:
-    image: go_teste_metrics
+  app-sd:
     build: .
     ports:
       - "8080:8080"
 
-  app_java:
-    image: java_spring_app
+  app-java:
     build: example
+    volumes:
+      - "./application.properties:/app/application.properties"
     ports:
       - "8081:8080"
 
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "prometheus-data:/prometheus"
